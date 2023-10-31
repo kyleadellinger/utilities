@@ -1,2 +1,2 @@
 # utilities
-catchall for various utilities 
+catch all for various utilities 
