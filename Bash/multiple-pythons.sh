@@ -12,3 +12,5 @@ sudo apt install python3.9 -y
 
 # then:
 # sudo update-alternatives --config python
+# OR
+# sudo update-alternatives --set python /usr/bin/python3.9
