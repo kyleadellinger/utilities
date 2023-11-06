@@ -182,6 +182,7 @@ function kill-bw {
 }
 
 function downCLI {
+    $ProgressPreference = 'SilentlyContinue'
     invoke-webrequest -uri "https://downloads.mend.io/cli/windows_amd64/mend.exe" -OutFile "mend.exe"
 }
 ####################################
