@@ -1,0 +1,81 @@
+" Disable compatibility with vi which can cause unexpected issues
+set nocompatible
+
+" Enable file type detection. vim will be able to try to detect the type of file in use.
+filetype on
+
+" Enable plugins and load plugin for the detected file type
+filetype plugin on
+
+" Load an indent file for the detected file type.
+filetype indent on
+
+" Turn syntax highlighting on.
+syntax on
+
+" Add numbers to each line on the left-hand side
+set number
+
+" Highlight cursor line underneath the cursor horizontally
+" set cursorline
+
+" Hightlight cursor line underneath the cursor vertically
+set cursorcolumn
+
+" set shift width to 4 spaces
+set shiftwidth=4
+
+" set tab width to 4 columns
+set tabstop=4
+
+" use space characters instead of tab
+set expandtab
+
+" Do not save backup files
+" set nobackup
+
+" Do not let cursor scroll below or above N number of lines when scrolling
+" set scrolloff=10
+
+" indent when moving to the next line while writing code
+set autoindent
+
+" enable all Python syntax highlighting features
+let python_highlight_all = 1
+" Do not wrap lines. allow long lines to extend as far as the line goes.
+" set nowrap
+
+" while searching through a file incrementally, highlight matching characters as you type
+set incsearch
+
+" ignore capital letters during search
+set ignorecase
+
+" override the ignorecase option if searching for capital letters.
+" This will allow you to search specifically for capital letters
+set smartcase
+
+" show partial command you type in the last line of the screen
+set showcmd
+
+" show matching words during a search
+set showmatch
+
+" use highlighting when doing a search
+set hlsearch
+
+" Set the commands to save in history; default is 20
+set history=1000
+
+" Enable auto completion menu after pressing TAB
+set wildmenu
+
+" Make wildmenu behave like bash completion
+set wildmode=list:longest
+
+" There are certain files that we would not want to edit with vim
+" Ignore these
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+" YAML config
+let g:indentLine_char = '|' " this is dependent upon a plugin which I don't have
