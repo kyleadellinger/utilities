@@ -24,6 +24,24 @@ function conditional-unlock {
       bw sync
     }
 }
+##############################################################
+function clean-pycache {
+    [cmdletbinding()]
+    param(
+    [parameter(mandatory=$true)]
+    [string] $path
+    )
+    get-childitem -path $path -filter *__pycache__* -recurse | remove-item -force -recurse
+}
+###############################################################
+### python script/app wrapper using venv basic example invoke:
+###############################################################
+function pyfire {
+	$python_int = "C:\users\kdellinger\.virtualenvs\pyurl3-meRjFCHJ\Scripts\python.exe"
+	$script = "C:\users\kdellinger\kypy\pyurl3\pyfire.py"
+	& $python_int $script $args
+}
+################################################################
 
 function set-envapp {
     if ((bw status | convertfrom-json).status -eq "locked") {
@@ -188,8 +206,6 @@ function downCLI {
 ####################################
 ## END BLOCK FOR SET ENV FOR CLI
 ####################################
-
-
 # docker token
 function docker-token {
     conditional-unlock
