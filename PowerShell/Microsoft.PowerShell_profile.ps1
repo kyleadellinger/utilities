@@ -4,6 +4,9 @@
 ## AT LEAST SEE ABOUT FOLLOWING BEST PRACTICES
 #############################################
 
+$progresspreference = "silentlycontinue"
+# makes invoke-webrequest and test-netconnection SIGNIFICANTLY faster.
+# in a surprising / confusing way...
 
 ############################################
 ## THIS SECTION RELIES UPON BITWARDEN CLI ##
