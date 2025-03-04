@@ -1,0 +1,52 @@
+# default podman container registry: /etc/containers/registries.conf
+# login to registry: podman login $registry. eg `podman login docker.io`
+# adjust registries per user: $HOME/.config/containers/registries.conf
+#
+# each system user has own container storage
+# root users: /var/lib/containers/storage
+# other user: $HOME/.local/share/containers/storage
+#
+# PULL
+# podman pull docker.io/nginx
+# podman pull quay.io/quay/busybox
+#
+# RUN
+# podman run --name docker-nginx -p 8080:80 docker.io/nginx
+# other potentially helpfuls -> podman port -l; podman inspect -l; 
+# podman images; podman ps; podman ps -a; podman stop <cn name>; podman rm <cn name>;
+#
+# BUILD
+# can write a Dockerfile. then, similarly -> `podman build -t scriptcamp/nginx .` in dir
+#
+# PUSH
+# podman push scriptcamp/nginx
+#
+# POD
+# unit where you can have one or more containers
+# podman pod --help
+# podman pod create --name demo-pod
+# podman pod ls
+# podman ps -a --pod
+# # add containers to pod
+# podman run -dt --pod demo-pod nginx
+# # start, stop, rm containers inside pod:
+# podman start <cn id>; podman stop <cn id>; podman rm <cn id>;
+# # create pod with containers
+# podman run -dt --pod new:frontend -p 8080:80 nginx
+# (if you access port 8080 on host, should see nginx homepage)
+# # start, stop, delete pod
+# podman pod stop <podname>; podman start <podname>;
+# podman pod rm <podname>
+# podman pod rm -f <podname>;
+#
+# # generate kubernetes yaml from podman pod definitions
+# - deploy pod named 'webserver'
+# podman run -dt --pod new:webserver -p 8080:80 nginx
+# - generate kubernetes yaml
+# podman generate kube webserver
+# - redirect to file
+# podman generate kube webserver >> webserver.yaml
+#
+# # create pod from yaml
+# - with a file like 'webserver.yaml' above:
+# podman play kube webserver.yaml
