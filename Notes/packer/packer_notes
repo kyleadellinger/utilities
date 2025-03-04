@@ -1,0 +1,38 @@
+# PACKER block:
+# contains Packer settings, including version
+# required plugins are also here
+# each plugin block contains a 'version' and a 'source' attribute
+# 'source' is only necessary when using a plugin outside of hashi
+
+# SOURCE block:
+# configures a specific 'builder' plugin, which is invoked by BUILD block
+# uses 'builders' and 'communicators' to define:
+#       - virtualization to use
+#       - how to launch image being provisioned
+#       - how to connect to it
+# builders and communicators bundled together and configured in SOURCE block
+# SOURCE can be reused across multiple builds
+# multiple SOURCEs can be used in a single build
+# two important labels:
+#       - builder type
+#       - name
+# in example, 'builder' type is 'docker', 'name' is 'ubuntu'
+# each 'builder' has own attributes
+
+# BUILD block:
+# defines what Packer should do with artifact after it launches
+# in example, 'build' block references image defined by SOURCE block
+
+# packer initialize
+# packer init $dir
+# initializing will download plugins. will exit without output if already present.
+
+# format
+# packer fmt $file
+
+# validate
+# packer validate $file
+
+# build ex:
+# packer build docker-ubuntu.pkr.hcl
+ 
