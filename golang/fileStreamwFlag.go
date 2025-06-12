@@ -10,7 +10,8 @@ import (
 )
 
 const (
-	cMatch = "matched"
+	cMatch   = "matched"
+	cNoMatch = "not matched"
 )
 
 var (
@@ -39,7 +40,8 @@ func main() {
 	}
 
 	rCount := map[string]int{
-		cMatch: 0,
+		cMatch:   0,
+		cNoMatch: 0,
 	}
 
 	f, err := os.Open(*targetFile)
@@ -54,7 +56,7 @@ func main() {
 		line, err := r.ReadString('\n')
 		if err != nil {
 			if err == io.EOF {
-				fmt.Println("<EOF>")
+				fmt.Println("Hit <EOF>")
 				break // or return //  or not. . .
 			}
 			fmt.Printf("Thar she goes again! %q\n", err)
@@ -64,8 +66,12 @@ func main() {
 		if matched != nil {
 			vPrinter(matched)
 			countOne(cMatch, rCount)
+		} else {
+			vPrinter(matched)
+			countOne(cNoMatch, rCount)
 		}
-		fmt.Println("Total finds: ", rCount)
-		fmt.Println("goodbye")
 	}
+	totallines := rCount[cMatch] + rCount[cNoMatch]
+	fmt.Println("Total finds: ", rCount[cMatch])
+	fmt.Println("Total lines read: ", totallines)
 }
