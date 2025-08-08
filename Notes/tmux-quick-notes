@@ -1,0 +1,19 @@
+# tmux
+# - launches a tmux server, creates default session (number 0), and attaches to it.
+# tmux new -s Session1
+# - creates tmux session with name `Session1`
+
+# detach from session:
+# ctrl+b then d
+
+# tmux ls
+# - list tmux sessions
+
+# attach session:
+# tmux attach -t 0
+
+# view all keybinds (`q` to exit):
+# ctrl+b ?
+
+# command line to type commands:
+# ctrl+b :
