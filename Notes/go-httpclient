@@ -1,0 +1,52 @@
+##########################
+### BASIC GET AND POST #####
+##########################
+
+import net/http
+
+// basic get, using default http.Client
+r1, err := http.Get("http://google.com/robots.txt")
+
+// NOTE: reminder about default http Client timeout
+
+// read response
+// TODO
+
+defer r1.Body.Close()
+
+##########################
+// POST form
+form := url.Values{} //
+form.Add("foo", "bar")
+
+r3, err := http.Post(
+	"https://www.google.com/robots.txt",
+	"application/x-www-form-urlencoded",
+	strings.NewReader(form.Encode()),
+}
+
+// read response
+// TODO
+
+defer r3.Body.Close()
+
+// PostForm() is a POST request convenience function
+// ie instead of calling encode on the form to be submitted:
+
+form := url.Values{}
+form.Add("foo", "bar")
+r3, err := http.PostForm("https://www.google.com/robots.txt", form)
+
+// read response
+// close body
+###########################
+###########################
+
+BASIC REQUEST NOTES:
+
+req, err := http.NewRequest("DELETE", "https://www.google.com/robots.txt", nil)
+var client http.Client
+resp, err := client.Do(req)
+// handle error, read response body, close reponse
+
+############################
