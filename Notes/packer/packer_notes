@@ -23,6 +23,24 @@
 # defines what Packer should do with artifact after it launches
 # in example, 'build' block references image defined by SOURCE block
 
+# VARIABLEs
+# variable precedence, from lowest to highest:
+# variable defaults, environment variables, variable file(s), command-line
+####### eg command line variable file:
+# packer build --var-file=example.pkrvars/hcl packer-file-build.pkr.hcl
+# packer will automatically load any variable file that matches the name:
+# *.auto.pkrvars.hcl
+# without needing to pass file via command line.
+####### eg command line flag:
+# packer build --var docker_image=ubuntu:focal .
+####### eg ENV VARs
+# packer will read env vars in form of `PKR_VAR_$name` to find values;
+# they are typed in config then as `$name`.
+
+# note that the files in a directory can be named anything:
+# all files ending in .pkr.hcl
+#
+
 # packer initialize
 # packer init $dir
 # initializing will download plugins. will exit without output if already present.
@@ -35,4 +53,3 @@
 
 # build ex:
 # packer build docker-ubuntu.pkr.hcl
- 
