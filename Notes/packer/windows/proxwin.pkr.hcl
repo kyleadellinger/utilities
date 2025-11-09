@@ -11,54 +11,10 @@ packer {
     }
   }
 }
-# variables (cannot be updated during runtime)
-# variable "image_name" {
-#  type = string
-#  default = "ubuntu:jammy"
-# }
 
-variable "sun_windows_iso_path" {
-  type    = string
-  default = "local:iso/SERVER_EVAL_x64FRE_en-us.iso"
+locals {
+  vm_build_description = "Packer built on ${timestamp()}"
 }
-
-variable "sun_windows_iso_sha" {
-  type    = string
-  default = "sha256:3e4fa6d8507b554856fc9ca6079cc402df11a8b79344871669f0251535255325"
-}
-
-variable "build_node" {
-  type    = string
-  default = "harv"
-}
-
-variable "proxurl" {
-  type    = string
-  default = "https://harv.gitbit.cloud:8006/api2/json/"
-}
-
-variable "temp_name" {
-  type    = string
-  default = "packer-92"
-}
-
-variable "temp_descrip" {
-  type = string
-  # default = "Image built ${timestamp}"
-  default = "The docs are seemingly wrong about the timestamp funcion"
-}
-
-variable "username" {
-  type = string
-  ## use env var PKR_VAR_username
-}
-
-variable "secret_token" {
-  type      = string
-  sensitive = true
-  ## use env var PKR_VAR_secret_token
-}
-
 
 # 'source' block configures a 'builder' plugin, which is to be invoked by the 'build' block, below.
 # will use 'builders' and 'communication' to define what virtualization, how to launch, and how to connect.
@@ -73,21 +29,22 @@ source "proxmox-iso" "win85" {
   ## this is how variables are accessed string interpolation:
   # image = "echo Running ${var.image_name} Image"
 
-  insecure_skip_tls_verify = false
+  insecure_skip_tls_verify = var.skip_tls_verify
 
+  // in the docs, this is boot_iso,
+  // but in example, it's just 'iso'...
   boot_iso {
-    type         = "scsi"
+    type         = var.boot_control_type
     iso_file     = var.sun_windows_iso_path
     iso_checksum = var.sun_windows_iso_sha
     # note: additional iso files, virtio drivers, etc.
-    unmount = true
+    unmount = var.boot_unmount
   }
 
   disks {
-    disk_size    = "5G"
-    #storage_pool = "local-lvm"
-    storage_pool = "harv-thin"
-    type         = "scsi"
+    disk_size    = var.vm_disk_size
+    storage_pool = var.vm_storage_pool
+    type         = var.vm_disk_type
   }
   efi_config {
     efi_storage_pool  = "harv-thin"
