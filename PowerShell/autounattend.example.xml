@@ -108,7 +108,7 @@
             <TimeZone>Eastern Standard Time</TimeZone>
             <AutoLogon>
                 <Password>
-                    <Value>QQB1AHQAbwBSAGUAcAB0AGkAbABlAHMAUABhAHMAcwB3AG8AcgBkAA==</Value>
+                    <Value></Value>
                     <PlainText>false</PlainText>
                 </Password>
                 <Enabled>true</Enabled>
