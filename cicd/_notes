@@ -1,0 +1,20 @@
+############################
+### gitlab ci/cd pipeline
+############################
+
+## global keywords:
+  default
+  	- custom default values for job keywords
+  include
+  	- import config from other yaml files
+  stages
+	- name and order of pipeline stages
+  variables
+  	- define default ci/cd vars for all jobs in pipeline
+  workflow
+  	- control types of pipeline run
+
+## header keywords:
+  spec
+  	- define specifications for external configuration files
+
