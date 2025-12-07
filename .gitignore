@@ -5,6 +5,7 @@ __pycache__/
 
 # kyle special
 *.secret
+*.secret.*
 *.secrets
 secrets/
 secret/
