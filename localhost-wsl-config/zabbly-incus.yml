@@ -1,0 +1,58 @@
+---
+- name: Install zabbly repo for incus setup/install on deb flavor
+  ## note: you need to be using WSL 2. has not been tested on 1.
+  
+  hosts: 127.0.0.1
+  connection: local
+  become: true
+
+  vars:
+    my_user: "{{ user }}"
+
+  tasks:
+    - name: Prerequisites
+      ansible.builtin.apt:
+        name: gpg
+        state: present
+
+    - name: Add key and repo block
+      tags: zabbly-key
+      block:
+        - name: Add Key
+          ansible.builtin.get_url:
+            url: https://pkgs.zabbly.com/key.asc
+            dest: /etc/apt/keyrings/zabbly.asc
+            checksum: sha256:f1adb44fdf82083f983a392b5b406d34e473dce3d66a51de3118cdc1f51d3f87
+
+        - name: Add repo
+          ansible.builtin.deb822_repository:
+            name: zabbly-incus-stable.sources
+            types: deb
+            uris: https://pkgs.zabbly.com/incus/stable
+            suites: "{{ ansible_distribution_release }}"
+            components: main
+            architectures: amd64
+            signed_by: /etc/apt/keyrings/zabbly.asc
+
+    - name: Update cache and install
+      ansible.builtin.apt:
+        update_cache: true
+        name: incus
+        state: present
+
+    - name: Group management
+      tags: incus-group
+      block:
+        - name: Ensure group exists
+          ansible.builtin.group:
+            name: incus-admin
+            state: present
+
+        - name: Add VAR user
+          ansible.builtin.user:
+            append: true
+            name: "{{ my_user }}"
+            groups: incus-admin
+
+...
+

@@ -1,0 +1,13 @@
+---
+- name: Test custom filter plugin
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Something something filter filter
+      ansible.builtin.debug:
+        msg: "{{ target | host_help }}" # the name here has to match the KEY in the main class RETURN VALUE in the relevant filter plugin code
+        # also now that this works, how the fuck is it going to be used? lol
+
+...

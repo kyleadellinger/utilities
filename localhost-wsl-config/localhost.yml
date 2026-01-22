@@ -1,0 +1,62 @@
+---
+- name: Install packages and make system changes to quickly configure WSL 2 instance
+  ## note: you need to be using WSL 2. has not been tested on 1.
+  ## note 2: this is for debian flavored
+  hosts: 127.0.0.1
+  connection: local
+  become: true
+
+  vars:
+
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        cache_valid_time: 3600
+        name:
+          - dnsutils
+          - curl
+          - wget
+          - git
+          - software-properties-common
+          - vim
+          - bat
+          - ca-certificates
+          - file
+          - fzf
+          - krb5-user
+          - openscap-scanner
+          - openssh-client
+          - ripgrep
+          - rsync
+          - build-essential
+          - libssl-dev
+          - zlib1g-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - libncursesw5-dev
+          - xz-utils
+          - tk-dev
+          - libxml2-dev
+          - libxmlsec1-dev
+          - libffi-dev
+          - liblzma-dev
+          - pipenv
+          - ipython3
+          - python3-debian
+          - man
+          # required for some python (ansible) dependencies
+          - gcc
+          - python3-dev
+          - libkrb5-dev
+          - clang
+        state: present
+      tags: local-packages
+
+    - name: Unsure why exactly this is needed, but, for posterity
+      ansible.builtin.command:
+        cmd: >
+          setcap cap_net_raw+p /bin/ping
+
+
+  

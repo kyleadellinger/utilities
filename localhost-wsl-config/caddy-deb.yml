@@ -1,0 +1,36 @@
+---
+- name: Install Caddy web server on Debian
+  ## note: this doesn't actually work
+  
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    my_user: "{{ user }}"
+
+  tasks:
+    - name: Add key and repo block
+      tags: caddy
+      block:
+        - name: Add repo
+          ansible.builtin.deb822_repository:
+            name: caddy-stable
+            types: [deb]
+            uris: "https://dl.cloudsmith.io/public/caddy/stable/deb/debian"
+            signed_by: "https://dl.cloudsmith.io/public/caddy/stable/gpg.key"
+              #            suites: "{{ ansible_distribution_release }}"
+            suites: [stable]
+            components: [main]
+              #            architectures: amd64
+            state: present
+            enabled: true
+
+        - name: Update cache and install
+          ansible.builtin.apt:
+            update_cache: true
+            name: caddy
+            state: present
+
+...
+
