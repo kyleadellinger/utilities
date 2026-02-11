@@ -1,35 +1,48 @@
-" Disable compatibility with vi which can cause unexpected issues
-set nocompatible
+" primary interest/use:
 
-" Enable file type detection. vim will be able to try to detect the type of file in use.
-filetype on
+set number    " Add numbers to each line on left side
 
-" Enable plugins and load plugin for the detected file type
-filetype plugin on
+filetype on         " Enable file type detection; try to detect type of file in use
+filetype indent on  " Load an indent file for detected file type
+filetype plugin on  " Enable plugins and load plugin for the detected file type
 
-" Load an indent file for the detected file type.
-filetype indent on
+syntax on                     " syntax highlighting
+let python_highlight_all = 1  " enable all Python syntax highlighting features
 
-" Turn syntax highlighting on.
-syntax on
+set autoindent      " indent when moving to the next line while writing code
+set shiftwidth=4    " shift width to 4 spaces
+set tabstop=4       " tab width 4 spaces
+set expandtab       " tab key expands to space characters
 
-" Add numbers to each line on the left-hand side
-set number
+set backspace=indent,eol,start  " generally reasonable use of backspace key
 
-" Highlight cursor line underneath the cursor horizontally
-" set cursorline
+set incsearch   " incremental search, <CR> to stop
+set showmatch   " show matching words during a search
+set ignorecase  " ignore capital letters during search
+set smartcase   " case-insensitive unless providing capital letters; overrides ignorecase option if searching for capital letters.
+set hlsearch    " use highlighting when doing a search
 
-" Hightlight cursor line underneath the cursor vertically
-set cursorcolumn
+set ruler      " current line number at bottom-right
+set wildmenu   " command-line completion, use <tab> to move around, <CR> to validate
 
-" set shift width to 4 spaces
-set shiftwidth=4
+" primarily reminders:
 
-" set tab width to 4 columns
-set tabstop=4
+set showcmd       " show partial command you type in the last line of the screen
+set history=1000  " Set the commands to save in history; default is 20
 
-" use space characters instead of tab
-set expandtab
+set nocompatible    " Disable compatibility with vi which can cause unexpected issues
+
+set wildmenu  " Enable auto completion menu after pressing TAB
+set wildmode=list:longest " Make wildmenu behave like bash completion
+
+" set cursorline    " Highlight cursor line underneath the cursor horizontally
+" set cursorcolumn  " Hightlight cursor line underneath the cursor vertically
+
+" Do not wrap lines. allow long lines to extend as far as the line goes.
+" set nowrap
+
+" Ignore these file extensions
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " Do not save backup files
 " set nobackup
@@ -37,45 +50,7 @@ set expandtab
 " Do not let cursor scroll below or above N number of lines when scrolling
 " set scrolloff=10
 
-" indent when moving to the next line while writing code
-set autoindent
-
-" enable all Python syntax highlighting features
-let python_highlight_all = 1
-" Do not wrap lines. allow long lines to extend as far as the line goes.
-" set nowrap
-
-" while searching through a file incrementally, highlight matching characters as you type
-set incsearch
-
-" ignore capital letters during search
-set ignorecase
-
-" override the ignorecase option if searching for capital letters.
-" This will allow you to search specifically for capital letters
-set smartcase
-
-" show partial command you type in the last line of the screen
-set showcmd
-
-" show matching words during a search
-set showmatch
-
-" use highlighting when doing a search
-set hlsearch
-
-" Set the commands to save in history; default is 20
-set history=1000
-
-" Enable auto completion menu after pressing TAB
-set wildmenu
-
-" Make wildmenu behave like bash completion
-set wildmode=list:longest
-
-" There are certain files that we would not want to edit with vim
-" Ignore these
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+" set hidden  " " 'possibility to have more than one unsaved buffers'
 
 " YAML config
-let g:indentLine_char = '|' " this is dependent upon a plugin which I don't have
+" let g:indentLine_char = '|' " this is dependent upon a plugin which I don't have
