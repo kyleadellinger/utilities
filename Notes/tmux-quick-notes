@@ -5,15 +5,39 @@
 
 # detach from session:
 # ctrl+b then d
+# tmux detach
 
 # tmux ls
 # - list tmux sessions
 
 # attach session:
 # tmux attach -t 0
+# tmux a -t <session-id>
+
+# kill current session:
+# tmux kill-ses
+
+# kill all sessions:
+# tmux kill-ses -a
 
 # view all keybinds (`q` to exit):
 # ctrl+b ?
 
 # command line to type commands:
 # ctrl+b :
+
+# panes
+# create new pane, horizontal or vertical:
+# ctrl+b ... " / %
+#
+# kill pane:
+# ctrl+b ... x
+
+# toggle layout:
+# ctrl+b ... <space>
+# toggle specific:
+# ctrl+b ... alt + <1..5>
+# ctrl+b ... z
+#
+# navigate:
+# ctrl+b ... <arrow keys>
