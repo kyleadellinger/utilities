@@ -241,5 +241,20 @@ function Win-NetInit {
 
 } # function
 
+### WinRM / Remoting:
+#New-NetFirewallRule -DisplayName "Packer WinRM" -Direction Inbound -Protocol TCP -Action Allow -LocalPort 5985 -RemoteAddress any
+
+<#
+## WSUS
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' -Name WUServer -Value $valid_wsus
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' -Name WUStatusServer -Value $valid_wsus
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU' -Name "UseWUServer" -Value 1
+
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' -Name "TargetGroup" -Value $valid_wsus_group
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' -Name "TargetGroupEnabled" -Value 1
+#>
+
+
+
 # MAIN
 Win-NetInit -ipaddress $ipaddress -gateway $gateway -subnet $subnet -nameservers $nameservers
