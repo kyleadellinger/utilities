@@ -143,5 +143,5 @@ function Read-Secret {
 
   $cred = Import-CliXml -LiteralPath $FilePath
   return $cred
-
 }
+

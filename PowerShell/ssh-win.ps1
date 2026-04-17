@@ -51,3 +51,38 @@ Add-Content -Force -Path $env:ProgramData\ssh\administrators_authorized_keys -Va
 icacls.exe $env:ProgramData\ssh\administrators_authorized_keys /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
 
 #>
+
+######
+## additional notes that have been validated/tested:
+<#
+# obtain "the object"
+$GetSSHServer = Get-WindowsCapability -Online | Where-Object -Property 'name' -like 'OpenSSH.server*'
+
+# add/install it
+Add-WindowsCapability -Online -Name $GetSSHServer.name
+
+# ensure service started/running
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
+
+# firewall
+New-NetFirewallRule -DisplayName 'OpenSSH Server' `
+    -Name 'OpenSSH-Server-In-TCP' `
+    -Direction Inbound `
+    -Protocol TCP `
+    -Action Allow `
+    -LocalPort 22 `
+    -RemoteAddress Any
+
+# set default ssh login shell to powershell instead of cmd
+# (because why the fuck would cmd be the default.... tracks tho.... clownassshit)
+$SSHPropertyParams = @{
+  Path = 'HKLM:\SOFTWARE\OpenSSH'
+  Name = 'DefaultShell'
+  Value = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+  PropertyType = 'String'
+  Force = $true
+}
+
+New-ItemProperty @SSHPropertyParams
+

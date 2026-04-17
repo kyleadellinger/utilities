@@ -1,4 +1,3 @@
-
 ## these are rought notes to:
 ## - generate a self-signed certificate
 ## - enable ps remoting
@@ -6,7 +5,9 @@
 
 ## note: in testing this has worked with supplying IP address in place of DNS/computer hostname
 
-$certificate = New-SelfSignedCertificate -CertStoreLocation 'Cert:\LocalMachine\My' -DnsName 'ipaddress'
+$certificate = New-SelfSignedCertificate `
+    -CertStoreLocation 'Cert:\LocalMachine\My' `
+    -DnsName 'ipaddress'
 
 Enable-PSRemoting -SkipNetworkProfileCheck -Force
 
