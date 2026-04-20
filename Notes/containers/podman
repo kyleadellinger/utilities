@@ -1,3 +1,10 @@
+# "rootless podman requires user to have a range of UIDs listed in files /etc/subuid and /etc/subgid."
+# "for each user that will be allowed to create containers, update these files for the user."
+# "NOTE: that the values must be unique per user; if there is overlap, namespaces could overlap between users and result in corruption."
+#
+# rather than update the files directly, use usermod, eg:
+# usermod --add-subuids 100000-165535 --add-subgids 100000-165535 johndoe
+#
 # default podman container registry: /etc/containers/registries.conf
 # login to registry: podman login $registry. eg `podman login docker.io`
 # adjust registries per user: $HOME/.config/containers/registries.conf

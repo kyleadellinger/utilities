@@ -1,0 +1,21 @@
+# compare and contrast:
+
+podman run -it \
+    --name someContainer \
+    --entrypoint="" \
+    hashicorp/packer \
+    /bin/bash
+
+podman run -it \
+    --name someContainer2 \
+    --entrypoint=/bin/sh \
+    hashicorp/packer \
+
+# In both cases, passing --entrypoint clears out any default command set on the image.
+#
+# For an entrypoint, an explicit flag is needed in order to override;
+# making it not quite the same as passing a positional arg command.
+# 
+# --entrypoint expects a string value that is representative of the name or path to binary
+# that you want to invoke when the container starts.
+
