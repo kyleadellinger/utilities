@@ -24,3 +24,6 @@
 # xfs - filesystem dependent obvs
 # -- eg:
 # -- xfs_growfs /dev/mapper/vg01-tmp
+# -- real eg:
+# -- xfs_growfs /dev/rl/root
+
