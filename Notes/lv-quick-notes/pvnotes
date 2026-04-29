@@ -1,0 +1,26 @@
+
+# pvcreate ${block_device}
+
+# vgcreate
+# - creates new volume group
+# - volume group must have at least one member
+# -- eg:
+# -- vgcreate ${name-of-new-vg} ${pv-member(s)}
+
+# vgextend
+# - add new pv to existing volume group
+# -- eg:
+# -- vgextend ${name-of-vg} ${pv-member}
+# -- real eg:
+# -- vgextend rl /dev/sdd
+
+# lvextend
+# extend existing lv
+# -- eg:
+# -- lvextend -l +100%FREE ${name-of-lv}
+# -- real eg:
+# -- lvextend -l +100%FREE /dev/rl/root
+
+# xfs - filesystem dependent obvs
+# -- eg:
+# -- xfs_growfs /dev/mapper/vg01-tmp
