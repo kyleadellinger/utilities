@@ -3,6 +3,12 @@
 
 	.SYNOPSIS
 	Test TCP connection.
+	**
+
+	This is also interesting to review the script blocks and function(s),
+	then also dot sourcing main at the bottom.
+	
+	**
 
 	.EXAMPLE
 	PS > $http = @"

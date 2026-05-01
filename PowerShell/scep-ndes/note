@@ -1,0 +1,28 @@
+# module: PSCertificateEnrollment
+# https://github.com/Sleepw4lker/PSCertificateEnrollment
+
+# base example request NDES / SCEP cert:
+$creds = Get-Credential
+
+# get enrollment challenge:
+$otp = Get-NDESOTP -ComputerName $NDESBox -Credential $cred
+
+# get cert:
+$SCEPCert = Get-SCEPCertificate -ComputerName $NDESBox -Subject 'CN=Test' -ChallengePassword $otp
+
+# $SCEPCert potentially useful methods/properties:
+# get CA issuer:
+$SCEPCert.Issuer
+
+# cert thumbprint
+$SCEPCert.Thumbprint
+
+$SCEPCert.SignatureAlgorithm
+
+# available extensions on certificate
+$SCEPCert.EnhancedKeyUsageList
+
+$SCEPCert.NotAfter / .NotBefore
+
+$SCEPCert.GetEffectiveDateString()
+
