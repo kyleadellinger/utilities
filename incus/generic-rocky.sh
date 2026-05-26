@@ -28,7 +28,7 @@ incus launch images:rockylinux/9 "$instancename"
 
 incus exec "$instancename" -- adduser "$newuser"
 incus exec "$instancename" -- passwd "$newuser" # prompt to set newuser password during creation
-incus exec "$instancename" -- dnf install -y sudo vim ncruses less file wget lsof # some utils
+incus exec "$instancename" -- dnf install -y sudo vim ncurses less file wget lsof # some utils
 incus exec "$instancename" -- usermod -aG wheel "$newuser" # add user to wheel
 incus file push "${PUSH_FILE1}" "${instancename}/home/${newuser}/${DEST_FILENAME}"
 incus file push "${PUSH_FILE2}" "${instancename}/etc/location/filename"
