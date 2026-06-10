@@ -1,0 +1,7 @@
+
+# positive lookahead (?=) -> ex: A(?=B) -> finds expression A where expression B follows 13 
+# negative lookahead (?!) -> ex: A(?!B) -> finds expression A where expression B does not follow
+# positive lookbehind (?<=) -> ex: (?<=B)A -> finds expression A where expression B precedes.
+# negative lookbehind (?<!) -> ex: (?<!B)A -> finds expression A where expresion B does not precede.
+
+
