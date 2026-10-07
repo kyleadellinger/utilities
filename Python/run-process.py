@@ -14,7 +14,7 @@ def run_subprocess(cmd, *args, **kwargs):
 
     """
     # note to self: add logging things for more fun.
-  
+
     try:
         verbose_print = kwargs.pop("verbose")
 
@@ -45,6 +45,8 @@ def run_subprocess(cmd, *args, **kwargs):
         # _cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, *args, **kwargs
         _cmd,
         capture_output=True,
+        # NOTE: capture_output appears to be unavailable in python 3.6
+        # ask me how I know...
         *args,
         **kwargs,
     )
