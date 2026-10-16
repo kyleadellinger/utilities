@@ -7,3 +7,5 @@
 # note: `;` at end of curly braces, plus spaces
 # note: `!` (negate test) ; and more importantly the spaces
 
+# ISO format timestamp reminder:
+date --iso-8601=seconds
