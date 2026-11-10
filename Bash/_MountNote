@@ -1,0 +1,6 @@
+# mount iso
+# create a mountpoint
+# mount -o loop /path/to/iso /mnt/point
+#
+# unmount:
+# umount /mnt/point
