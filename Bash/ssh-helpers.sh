@@ -40,6 +40,6 @@ function run-ssh-agent()
     else
         _ssh-agent-wrapper
     fi
-    ssh-add -l 2>&1 > /dev/null || ssh-add "${USER_KEY_FILE}" 
+    ssh-add -l &> /dev/null || ssh-add "${USER_KEY_FILE}" 
 }
 
