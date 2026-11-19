@@ -22,8 +22,14 @@ function get-ssh-fingerprint() {
 # and ensure not just continually starting ssh-agent processes
 ######## 
 
+#SSH_AUTH_SOCK=/tmp/ssh-krhNmbwqVgO8/agent.1880
+#SSH_AGENT_PID=1882
+
 SSH_ENV="${HOME}/.ssh/agent.pid"
 USER_KEY_FILE="${HOME}/.ssh/id_ed25519"
+
+# these don't quite work as expected
+# mostly here for later reference/study/review
 
 function _ssh-agent-wrapper()
 {
@@ -36,10 +42,25 @@ function run-ssh-agent()
 {
     if [ -f "${SSH_ENV}" ]; then
         . "${SSH_ENV}" > /dev/null
-        kill -1 "${SSH_AGENT_PID}" 2>/dev/null || _ssh-agent-wrapper
+        kill -9 "${SSH_AGENT_PID}" 2>/dev/null || _ssh-agent-wrapper
     else
         _ssh-agent-wrapper
     fi
     ssh-add -l &> /dev/null || ssh-add "${USER_KEY_FILE}" 
+}
+
+# similar to above, though this does work and is useful,
+# though primarily for ref/review/study
+function ssh-agent-find-sockets()
+{
+    find /tmp -uid $(id -u) -type s -name agent.\* 2>/dev/null
+}
+
+function kill-all-ssh-agent-instances()
+{
+    for p in $(pgrep ssh-agent)
+    do
+        kill -9 "$p"
+    done
 }
 
