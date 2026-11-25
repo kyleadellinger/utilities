@@ -40,7 +40,6 @@ def main():
     find_and_kill_zellijs_processes(verbose=_args.verbose)
     return
 
-
 if __name__ == "__main__":
     main()
 
