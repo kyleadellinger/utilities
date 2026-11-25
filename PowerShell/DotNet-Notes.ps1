@@ -37,3 +37,58 @@ $client.Dispose() # clean up resources
 [System.Web.Security.Membership]::GeneratePassword(20, 1)
 # GeneratePassword(int length, int minimumNumberOfNonAlphanumericCharacters)
 
+# List types
+# powershell arrays "@()"
+# two ways:
+# first:
+$List = [System.Collections.Generic.List[string]]::New()
+
+# second:
+using namespace System.Collections.Generic
+$List = [List[string]]::New()
+
+# LINQ linq (Language Integrated Query)
+# a dotnet component that allows for data querying and filtering.
+# typically a lot faster than pwsh native cmdlets such as where-object, measure-object, select-object, etc.
+#
+# compare lists:
+[Linq.Enumerable]::SequenceEqual($List1, $List2)
+# # True / False
+# note: contents of lists are compared, and the order of the contents matters.
+#
+# sort method:
+$List1.Sort()
+$List2.Sort()
+[Linq.Enumerable]::SequenceEqual($List1, $List2)
+#
+# min, max, average, sum:
+[Linq.Enumerable]::Min($List)
+[Linq.Enumerable]::Max($List)
+[Linq.Enumerable]::Average($List)
+[Linq.Enumerable]::Sum($List)
+[Linq.Enumerable]::Except($diffHashSet, $refHashSet)
+#
+# General "static extension method syntax":
+# [Linq.Enumerable]::MethodName($collection, $delegate)
+#
+# Provides significant performance improvements over native pwsh loops, especially on large data sets.
+
+# GetInterfaces
+# q: how to find what classes implement a given interface?
+# a: GetInterfaces method
+[System.Collections.Generic.List[int]].GetInterfaces()
+[System.Collections.Generic.Dictionary[int,string]].GetInterfaces()
+[Array].GetInterfaces()
+#
+# IsAssignableFrom
+# first, define type, then interface, then call IsAssignableFrom method:
+$Type = [List[string]]
+$Interface = [IEnumerable[string]]
+$Interface.IsAssignableFrom($Type)
+# # True / False
+#
+$Type = [Array]
+$Interface = [IEnumerable[string]]
+$Interface.IsAssignableFrom($Type)
+# (False)
+# 
